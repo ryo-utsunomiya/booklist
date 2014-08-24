@@ -1,4 +1,5 @@
-.idea
-src/app/cache/
+.idea/
+.vagrant/
+src/app/cache/*.volt
 src/vendor/
 src/data/

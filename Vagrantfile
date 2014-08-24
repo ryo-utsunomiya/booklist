@@ -39,10 +39,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder "../reading_list", "/var/www/reading_list"
-  config.vm.synced_folder "../reading_list/app/cache", "/var/www/reading_list/app/cache", mount_options: ["dmode=777,fmode=666"]
-  config.vm.synced_folder "../booklist", "/var/www/booklist"
-  config.vm.synced_folder "../booklist/app/cache", "/var/www/booklist/app/cache", mount_options: ["dmode=777,fmode=666"]
+  config.vm.synced_folder "src/", "/var/www/booklist"
+  config.vm.synced_folder "src/app/cache", "/var/www/booklist/app/cache", mount_options: ["dmode=777,fmode=666"]
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
