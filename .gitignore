@@ -1,5 +1,5 @@
 .idea/
 .vagrant/
-src/app/cache/*.volt
+src/app/cache/*.php
 src/vendor/
 src/data/
