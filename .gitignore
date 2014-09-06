@@ -1,5 +1,6 @@
 .idea/
 .vagrant/
 src/app/cache/*.php
+src/app/config/config.php
 src/vendor/
 src/data/

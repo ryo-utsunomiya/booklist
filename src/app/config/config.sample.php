@@ -1,12 +1,10 @@
 <?php
 
 return new \Phalcon\Config(array(
-    'database' => array(
-        'adapter'     => 'Mysql',
-        'host'        => 'localhost',
-        'username'    => 'root',
-        'password'    => '',
-        'dbname'      => 'test',
+    'database'    => array(
+        'dsn'      => 'mysql:host=localhost;dbname=booklist;charset=utf8',
+        'username' => '',
+        'password' => '',
     ),
     'application' => array(
         'controllersDir' => __DIR__ . '/../../app/controllers/',
