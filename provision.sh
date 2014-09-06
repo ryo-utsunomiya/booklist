@@ -24,3 +24,14 @@ sudo cp /var/www/booklist/server/etc/php5/conf.d/30-phalcon.ini /etc/php5/conf.d
 sudo cp /var/www/booklist/server/home/vagrant/.bashrc /home/vagrant/.bashrc
 
 sudo service apache2 restart
+
+mkdir ~/bin && cd ~/bin
+curl -s http://getcomposer.org/installer | php
+sudo ln -s ~/bin/composer.phar /usr/local/bin/composer
+composer require "phalcon/devtools" "dev-master"
+sudo ln -s /home/vagrant/bin/vendor/bin/phalcon.php /usr/local/bin/phalcon
+
+# todo
+# - MySQLは手動インストールで...
+# sudo apt-get install mysql-server
+# 
