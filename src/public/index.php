@@ -2,6 +2,8 @@
 
 error_reporting(E_ALL);
 
+define('APP_PATH', realpath(__DIR__ . '/../'));
+
 try {
 
     /**
@@ -23,7 +25,6 @@ try {
      * Handle the request
      */
     $application = new \Phalcon\Mvc\Application($di);
-
     echo $application->handle()->getContent();
 
 } catch (\Exception $e) {

@@ -30,6 +30,7 @@ $di->set('view', function () use ($config) {
     $view->registerEngines(array(
         '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
     ));
+    
     return $view;
 }, true);
 
@@ -62,8 +63,5 @@ $di->set('session', function () {
 });
 
 $di->set('router', function () {
-    $router = new \Phalcon\Mvc\Router();
-    $router->add('/', 'Index::index');
-    $router->add('/add', 'Index::add');
-    return $router;
+    return require APP_PATH . '/app/config/routes.php';
 });

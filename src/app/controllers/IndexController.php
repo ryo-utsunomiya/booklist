@@ -12,10 +12,5 @@ class IndexController extends ControllerBase
         $this->view->setVar('books', $books);
     }
 
-    public function addAction()
-    {
-        
-    }
-
 }
 
