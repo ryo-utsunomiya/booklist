@@ -38,10 +38,32 @@ class BooksTest extends \UnitTestCase
     /**
      * @test
      */
-    public function updateRateは与えられた文字列に応じてrateを上下させる()
+    public function updateRateは与えられた値に応じてrateを上下させる()
     {
-        $book = Books::createNewBook(['title' => uniqid()]);
-        $book->updateRate('plus');
+        $book = Books::createNewBook(['title' => 'test']);
+        $book->updateRate(Books::RATE_PLUS);
+        $this->assertEquals(1, $book->getRate());
+        $book->updateRate(Books::RATE_MINUS);
+        $this->assertEquals(0, $book->getRate());
+    }
+
+    /**
+     * @test
+     */
+    public function updateRateではrateは0より小さくならない()
+    {
+        $book = Books::createNewBook(['title' => 'test']);
+        $book->updateRate(Books::RATE_MINUS);
+        $this->assertEquals(0, $book->getRate());
+    }
+
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     */
+    public function updateRateに不正な値を与えると例外を投げる()
+    {
+        Books::createNewBook(['title' => 'test'])->updateRate('INVALID_STRING');
     }
 }
  

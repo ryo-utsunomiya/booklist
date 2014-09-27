@@ -18,8 +18,8 @@ class BooksController extends ControllerBase
         $id  = $this->dispatcher->getParam('id');
         $key = $this->dispatcher->getParam('key');
 
-        $book = Books::findFirst($id);
-        $book->updateRate($key);
+        Books::findFirst($id)
+             ->updateRate($key);
 
         $this->response->redirect('');
     }
