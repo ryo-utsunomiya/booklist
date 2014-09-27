@@ -30,7 +30,7 @@ $di->set('view', function () use ($config) {
     $view->registerEngines(array(
         '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
     ));
-    
+
     return $view;
 }, true);
 
@@ -64,4 +64,11 @@ $di->set('session', function () {
 
 $di->set('router', function () {
     return require APP_PATH . '/app/config/routes.php';
+});
+
+$di->set('dispatcher', function () {
+    $dispatcher = new \Phalcon\Mvc\Dispatcher();
+    $dispatcher->setDefaultNamespace('Booklist\Controller');
+    
+    return $dispatcher;
 });
