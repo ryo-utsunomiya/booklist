@@ -29,12 +29,9 @@ $di->set('url', function () use ($config) {
 $di->set('view', function () use ($config) {
     $view = new View();
     $view->setViewsDir($config->application->viewsDir);
-
-
     $view->registerEngines(array(
         '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
     ));
-
     return $view;
 }, true);
 
