@@ -24,6 +24,8 @@ class BooksTest extends \UnitTestCase
     {
         $book = Books::createNewBook(['title' => 'test']);
         $this->assertEquals('test', $book->getTitle());
+        $this->assertEquals(0, $book->getRate());
+        $this->assertEquals(0, $book->getOwn());
     }
 
     /**
