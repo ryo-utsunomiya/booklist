@@ -1,2 +1,2 @@
-reading_list
+booklist
 ============
