@@ -19,7 +19,7 @@ class RoutesTest extends \UnitTestCase
     public function router($url, $controller, $action)
     {
         /** @var \Phalcon\Mvc\Router $router */
-        $router = $this->getDI()->get('router');
+        $router = require APP_PATH . '/app/config/routes.php';
 
         $router->handle($url);
 
@@ -35,7 +35,7 @@ class RoutesTest extends \UnitTestCase
         return [
             ['/', 'index', 'index'], // Index::index
             ['/books/new', 'books', 'new'], // Books::new
-            ['/books/rate', 'books', 'rate'], // Books::rate
+            ['/books/1/rate/plus', 'books', 'rate'], // Books::rate
         ];
     }
 }

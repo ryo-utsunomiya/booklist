@@ -1,14 +1,17 @@
 <table class="table table-striped table-bordered table-hover"">
+<tr>
+    <th>title</th>
+    <th>rate</th>
+    <th>action</th>
+</tr>
+<?php foreach ($books as $book) : /** @var \Booklist\Model\Books $book */ { ?>
     <tr>
-        <th>title</th>
-        <th>rate</th>
-        <th>action</th>
+        <td style="max-width: 30em"><?= $book->getTitle() ?></td>
+        <td><?= $book->getRate() ?></td>
+        <td>
+            <a href="/books/<?= $book->getId() ?>/rate/plus">+</a>
+            <a href="/books/<?= $book->getId() ?>/rate/minus/">-</a>
+        </td>
     </tr>
-    <?php foreach ($books as $book) : /** @var \Books $book */ ?>
-        <tr>
-            <td style="max-width: 30em"><?= $book->getTitle() ?></td>
-            <td><?= $book->getRate() ?></td>
-            <td><a href="/books/rate/plus">+</a><a href="/books/rate/minus">-</a></td>
-        </tr>
-    <?php endforeach; ?>
+<?php } endforeach; ?>
 </table>

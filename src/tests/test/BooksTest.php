@@ -34,5 +34,14 @@ class BooksTest extends \UnitTestCase
     {
         Books::createNewBook([]); // expects ['title' => 'foo']
     }
+
+    /**
+     * @test
+     */
+    public function updateRateは与えられた文字列に応じてrateを上下させる()
+    {
+        $book = Books::createNewBook(['title' => uniqid()]);
+        $book->updateRate('plus');
+    }
 }
  

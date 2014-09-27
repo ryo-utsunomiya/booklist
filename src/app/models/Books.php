@@ -4,6 +4,19 @@ namespace Booklist\Model;
 
 class Books extends Base\Books
 {
+    const RATE_PLUS  = 'plus';
+    const RATE_MINUS = 'minus';
+
+    /**
+     * @param array $parameters
+     *
+     * @return Books
+     */
+    public static function findFirst($parameters = array())
+    {
+        return parent::findFirst($parameters);
+    }
+
     /**
      * @param array $params
      *
@@ -33,6 +46,24 @@ class Books extends Base\Books
         }
 
         return $book;
+    }
+
+    /**
+     * @param string $key
+     */
+    public function updateRate($key)
+    {
+        if ($key === self::RATE_PLUS) {
+            $this->setRate($this->getRate() + 1);
+        } elseif ($key === self::RATE_MINUS) {
+            $rate = max(0, $this->getRate() - 1); // マイナスにならないようにする
+            $this->setRate($rate);
+        } else {
+            throw new \InvalidArgumentException('rate has invalid value');
+        }
+        if (!$this->update()) {
+            // todo error handling
+        }
     }
 }
  
