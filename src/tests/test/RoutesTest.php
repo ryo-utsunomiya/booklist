@@ -33,8 +33,9 @@ class RoutesTest extends \UnitTestCase
     public function routerProvider()
     {
         return [
-            ['/', '', ''], // Index::index
-            ['/books/add', 'books', 'add'], // Books::add
+            ['/', 'index', 'index'], // Index::index
+            ['/books/new', 'books', 'new'], // Books::new
+            ['/books/rate', 'books', 'rate'], // Books::rate
         ];
     }
 }

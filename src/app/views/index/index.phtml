@@ -2,12 +2,13 @@
     <tr>
         <th>title</th>
         <th>rate</th>
-        <!--<th>action</th>-->
+        <th>action</th>
     </tr>
     <?php foreach ($books as $book) : /** @var \Books $book */ ?>
         <tr>
             <td style="max-width: 30em"><?= $book->getTitle() ?></td>
             <td><?= $book->getRate() ?></td>
+            <td><a href="/books/rate/plus">+</a><a href="/books/rate/minus">-</a></td>
         </tr>
     <?php endforeach; ?>
 </table>

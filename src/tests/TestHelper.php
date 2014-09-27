@@ -48,4 +48,8 @@ $di->setShared('db', function () use ($config) {
     ]);
 });
 
+$di->set('router', function () {
+    return require APP_PATH . '/app/config/routes.php';
+});
+
 DI::setDefault($di);
