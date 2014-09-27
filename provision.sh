@@ -40,3 +40,7 @@ sudo ln -s $HOME/bin/composer.phar /usr/local/bin/composer
 cd $HOME/bin
 composer require phalcon/devtools dev-master
 sudo ln -s $HOME/bin/vendor/bin/phalcon.php /usr/local/bin/phalcon
+
+# todo
+# - MySQLは手動インストールで...
+# sudo apt-get install mysql-server

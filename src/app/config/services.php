@@ -32,17 +32,6 @@ $di->set('view', function () use ($config) {
 
 
     $view->registerEngines(array(
-        '.volt'  => function ($view, $di) use ($config) {
-
-            $volt = new VoltEngine($view, $di);
-
-            $volt->setOptions(array(
-                'compiledPath'      => $config->application->cacheDir,
-                'compiledSeparator' => '_'
-            ));
-
-            return $volt;
-        },
         '.phtml' => 'Phalcon\Mvc\View\Engine\Php'
     ));
 
@@ -54,10 +43,9 @@ $di->set('view', function () use ($config) {
  */
 $di->set('db', function () use ($config) {
     return new DbAdapter(array(
-        'host'     => $config->database->host,
+        'dsn'      => $config->database->dsn,
         'username' => $config->database->username,
         'password' => $config->database->password,
-        'dbname'   => $config->database->dbname
     ));
 });
 
