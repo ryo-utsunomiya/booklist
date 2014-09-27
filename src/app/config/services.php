@@ -37,7 +37,7 @@ $di->set('view', function () use ($config) {
 /**
  * Database connection is created based in the parameters defined in the configuration file
  */
-$di->set('db', function () use ($config) {
+$di->setShared('db', function () use ($config) {
     return new DbAdapter(array(
         'dsn'      => $config->database->dsn,
         'username' => $config->database->username,

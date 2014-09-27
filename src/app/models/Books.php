@@ -17,7 +17,7 @@ class Books extends Base\Books
 
         $title = $params['title'];
         $rate  = isset($params['rate']) ? $params['rate'] : 0;
-        $own   = isset($params['own']) ? $params['own'] : false;
+        $own   = isset($params['own']) ? $params['own'] : 0;
 
         $book = new self();
         $book->setTitle($title);
@@ -33,18 +33,6 @@ class Books extends Base\Books
         }
 
         return $book;
-    }
-
-    /**
-     * @param int $own
-     *
-     * @return $this|void
-     */
-    public function setOwn($own)
-    {
-        $this->own = (bool)$own;
-
-        return $this;
     }
 }
  
