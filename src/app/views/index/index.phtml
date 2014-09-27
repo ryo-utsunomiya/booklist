@@ -9,8 +9,14 @@
         <td style="max-width: 30em"><?= $book->getTitle() ?></td>
         <td><?= $book->getRate() ?></td>
         <td>
-            <a href="/books/<?= $book->getId() ?>/rate/plus">+</a>
-            <a href="/books/<?= $book->getId() ?>/rate/minus/">-</a>
+            <button type="button" class="btn btn-default"
+                    onclick="location.href='/books/<?= $book->getId() ?>/rate/plus'">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <button type="button" class="btn btn-default"
+                    onclick="location.href='/books/<?= $book->getId() ?>/rate/minus'">
+                <span class="glyphicon glyphicon-minus"></span>
+            </button>
         </td>
     </tr>
 <?php } endforeach; ?>

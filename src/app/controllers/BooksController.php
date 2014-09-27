@@ -15,16 +15,13 @@ class BooksController extends ControllerBase
 
     public function rateAction()
     {
-        //if (!$this->request->isPost()) {
-        //    // todo error
-        //}
         $id  = $this->dispatcher->getParam('id');
         $key = $this->dispatcher->getParam('key');
 
         $book = Books::findFirst($id);
         $book->updateRate($key);
 
-        $this->dispatcher->forward(['controller' => 'index', 'action' => 'index']);
+        $this->response->redirect('');
     }
 
 }
