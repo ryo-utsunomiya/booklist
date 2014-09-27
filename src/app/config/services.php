@@ -27,18 +27,17 @@ $di->set('url', function () use ($config) {
  * Setting up the view component
  */
 $di->set('view', function () use ($config) {
-
     $view = new View();
-
     $view->setViewsDir($config->application->viewsDir);
 
+
     $view->registerEngines(array(
-        '.volt' => function ($view, $di) use ($config) {
+        '.volt'  => function ($view, $di) use ($config) {
 
             $volt = new VoltEngine($view, $di);
 
             $volt->setOptions(array(
-                'compiledPath' => $config->application->cacheDir,
+                'compiledPath'      => $config->application->cacheDir,
                 'compiledSeparator' => '_'
             ));
 
@@ -55,10 +54,10 @@ $di->set('view', function () use ($config) {
  */
 $di->set('db', function () use ($config) {
     return new DbAdapter(array(
-        'host' => $config->database->host,
+        'host'     => $config->database->host,
         'username' => $config->database->username,
         'password' => $config->database->password,
-        'dbname' => $config->database->dbname
+        'dbname'   => $config->database->dbname
     ));
 });
 

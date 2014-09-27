@@ -4,23 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a3b4a8feb21bd28f90fc7da646e761d",
+    "hash": "6536eb56945c8950136c76dcec700e74",
     "packages": [
-
-    ],
-    "packages-dev": [
         {
             "name": "phalcon/devtools",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phalcon/phalcon-devtools.git",
-                "reference": "5acdcec659c882760f4497e0a741f91c963e730c"
+                "reference": "f7e68a796bd9c086c49ece7437de2beb872efd42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phalcon/phalcon-devtools/zipball/5acdcec659c882760f4497e0a741f91c963e730c",
-                "reference": "5acdcec659c882760f4497e0a741f91c963e730c",
+                "url": "https://api.github.com/repos/phalcon/phalcon-devtools/zipball/f7e68a796bd9c086c49ece7437de2beb872efd42",
+                "reference": "f7e68a796bd9c086c49ece7437de2beb872efd42",
                 "shasum": ""
             },
             "require": {
@@ -51,21 +48,16 @@
                 "framework",
                 "phalcon"
             ],
-            "time": "2014-08-04 05:59:12"
+            "time": "2014-09-10 10:25:15"
         }
     ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "phalcon/devtools": 20
     },
     "prefer-stable": false,
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "platform": [],
+    "platform-dev": []
 }

@@ -1,5 +1,5 @@
 {
-    "require-dev": {
+    "require": {
         "phalcon/devtools": "dev-master"
     }
 }

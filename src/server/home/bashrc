@@ -110,6 +110,7 @@ if ! shopt -oq posix; then
 fi
 
 alias root='cd /var/www/booklist'
+alias pro='cd /var/www/booklist'
 alias rm='rm -i'
 alias mv='mv -i'
 alias cp='cp -i'
