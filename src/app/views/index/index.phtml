@@ -1,3 +1,13 @@
-<?php foreach ($books as $book) : ?>
-    <p><?= $book->getTitle() ?></p>
-<?php endforeach; ?>
+<table class="table table-striped table-bordered table-hover"">
+    <tr>
+        <th>title</th>
+        <th>rate</th>
+        <!--<th>action</th>-->
+    </tr>
+    <?php foreach ($books as $book) : /** @var \Books $book */ ?>
+        <tr>
+            <td style="max-width: 30em"><?= $book->getTitle() ?></td>
+            <td><?= $book->getRate() ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>

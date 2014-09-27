@@ -5,7 +5,16 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-        $this->view->setVar('books', Books::find());
+        $books = Books::query()
+                      ->orderBy('rate DESC')
+                      ->execute();
+
+        $this->view->setVar('books', $books);
+    }
+
+    public function addAction()
+    {
+        
     }
 
 }
