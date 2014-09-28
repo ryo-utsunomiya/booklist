@@ -28,7 +28,7 @@ function get_config()
  *
  * @return string
  */
-function get_base_uri($add_front_slash = false)
+function get_base_uri($rtrim = false)
 {
     $config = get_config();
     if (!isset($config['application']['baseUri'])) {
@@ -38,8 +38,8 @@ function get_base_uri($add_front_slash = false)
     if (empty($base_uri) || $base_uri === '/') {
         return '';
     }
-    if ($add_front_slash) {
-        $base_uri = '/' . $base_uri;
+    if ($rtrim) {
+        $base_uri = rtrim($base_uri, '/');
     }
 
     return $base_uri;
