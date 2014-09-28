@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @param $str
+ * @param string $str
  *
  * @return string
  */
@@ -24,11 +24,11 @@ function get_config()
 }
 
 /**
- * @param bool $add_front_slash
+ * @param bool $rtrim
  *
  * @return string
  */
-function get_base_uri($rtrim = false)
+function base_uri($rtrim = false)
 {
     $config = get_config();
     if (!isset($config['application']['baseUri'])) {
