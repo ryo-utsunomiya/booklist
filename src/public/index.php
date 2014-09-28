@@ -6,26 +6,20 @@ define('APP_PATH', realpath(__DIR__ . '/../'));
 
 try {
 
-    /**
-     * Read the configuration
-     */
-    $config = include __DIR__ . "/../app/config/config.php";
+    $config = require __DIR__ . "/../app/config/config.php";
 
-    /**
-     * Read auto-loader
-     */
-    include __DIR__ . "/../app/config/loader.php";
+    (new Phalcon\Loader())
+        ->registerDirs([
+            $config->application->controllersDir,
+            $config->application->modelsDir,
+        ])->registerNamespaces([
+            'Booklist\Controller' => APP_PATH . '/app/controllers',
+            'Booklist\Model'      => APP_PATH . '/app/models',
+        ])->register();
 
-    /**
-     * Read services
-     */
-    include __DIR__ . "/../app/config/services.php";
+    $di = require __DIR__ . "/../app/config/services.php";
 
-    /**
-     * Handle the request
-     */
-    $application = new \Phalcon\Mvc\Application($di);
-    echo $application->handle()->getContent();
+    echo (new Phalcon\Mvc\Application($di))->handle()->getContent();
 
 } catch (\Exception $e) {
     echo $e->getMessage();

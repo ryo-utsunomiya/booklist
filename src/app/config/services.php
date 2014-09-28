@@ -6,6 +6,10 @@ use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 
+if (!isset($config)) {
+    $config = require APP_PATH . '/app/config/config.php';
+}
+
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
  */
@@ -69,6 +73,8 @@ $di->set('router', function () {
 $di->set('dispatcher', function () {
     $dispatcher = new \Phalcon\Mvc\Dispatcher();
     $dispatcher->setDefaultNamespace('Booklist\Controller');
-    
+
     return $dispatcher;
 });
+
+return $di;

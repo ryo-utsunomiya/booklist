@@ -18,6 +18,7 @@ class BooksController extends ControllerBase
             } catch (\Exception $e) {
                 $this->view->setVar('error', $e->getMessage());
             }
+            $this->response->redirect('');
         }
     }
 
