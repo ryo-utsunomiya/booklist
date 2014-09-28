@@ -18,7 +18,7 @@ class BooksController extends ControllerBase
             } catch (\Exception $e) {
                 $this->view->setVar('error', $e->getMessage());
             }
-            $this->response->redirect('');
+            $this->response->redirect(get_base_uri());
         }
     }
 
@@ -30,7 +30,7 @@ class BooksController extends ControllerBase
         Books::findFirst($id)
              ->updateRate($key);
 
-        $this->response->redirect('');
+        $this->response->redirect(get_base_uri());
     }
 
     public function detailAction()
