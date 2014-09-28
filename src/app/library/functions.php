@@ -24,11 +24,9 @@ function get_config()
 }
 
 /**
- * @param bool $rtrim
- *
  * @return string
  */
-function base_uri($rtrim = false)
+function base_uri()
 {
     $config = get_config();
     if (!isset($config['application']['baseUri'])) {
@@ -37,9 +35,6 @@ function base_uri($rtrim = false)
     $base_uri = $config['application']['baseUri'];
     if (empty($base_uri) || $base_uri === '/') {
         return '';
-    }
-    if ($rtrim) {
-        $base_uri = rtrim($base_uri, '/');
     }
 
     return $base_uri;
