@@ -7,7 +7,7 @@ use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 
 if (!isset($config)) {
-    $config = require APP_PATH . '/app/config/config.php';
+    $config = get_config();
 }
 
 /**

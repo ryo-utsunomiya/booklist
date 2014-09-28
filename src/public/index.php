@@ -4,9 +4,11 @@ error_reporting(E_ALL);
 
 define('APP_PATH', realpath(__DIR__ . '/../'));
 
+require_once APP_PATH . '/app/library/functions.php';
+
 try {
 
-    $config = require __DIR__ . "/../app/config/config.php";
+    $config = get_config();
 
     (new Phalcon\Loader())
         ->registerDirs([
@@ -23,9 +25,4 @@ try {
 
 } catch (\Exception $e) {
     echo $e->getMessage();
-}
-
-function h($str)
-{
-    return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
