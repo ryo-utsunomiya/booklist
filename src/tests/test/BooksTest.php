@@ -39,9 +39,9 @@ class BooksTest extends \UnitTestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
+     * @expectedException \Exception
      */
-    public function duplicate_titleには例外を投げる()
+    public function titleが重複するとには例外を投げる()
     {
         $book1 = Books::createNewBook(['title' => 'test']);
         $book2 = Books::createNewBook(['title' => 'test']);

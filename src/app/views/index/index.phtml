@@ -7,18 +7,18 @@
     <?php foreach ($books as $book) /** @var \Booklist\Model\Books $book */ { ?>
         <tr>
             <td style="max-width: 30em">
-                <a href="/books/<?= $book->getId() ?>/detail">
-                    <?= $book->getTitle() ?>
+                <a href="/books/<?= h($book->getId()) ?>/detail">
+                    <?= h($book->getTitle()) ?>
                 </a>
             </td>
-            <td><?= $book->getRate() ?></td>
+            <td><?= h($book->getRate()) ?></td>
             <td>
                 <button type="button" class="btn btn-default"
-                        onclick="location.href='/books/<?= $book->getId() ?>/rate/plus'">
+                        onclick="location.href='/books/<?= h($book->getId()) ?>/rate/plus'">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
                 <button type="button" class="btn btn-default"
-                        onclick="location.href='/books/<?= $book->getId() ?>/rate/minus'">
+                        onclick="location.href='/books/<?= h($book->getId()) ?>/rate/minus'">
                     <span class="glyphicon glyphicon-minus"></span>
                 </button>
             </td>

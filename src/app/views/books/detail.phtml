@@ -1,9 +1,8 @@
-<?php print_r($book->toArray()) ?>
 <table class="table table-bordered">
-    <?php foreach ($book as $key => $value) { ?>
+    <?php foreach ($book->columnMap() as $column) { ?>
         <tr>
-            <th><?= $key ?></th>
-            <td><?= $value ?></td>
+            <th><?= $column ?></th>
+            <td><?= h($book->get($column)) ?></td>
         </tr>
-    <?php } ?>
+    <?php } // endforeach ?>
 </table>

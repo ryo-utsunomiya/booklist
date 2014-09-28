@@ -16,17 +16,7 @@ class BooksController extends ControllerBase
             try {
                 Books::createNewBook(['title' => $this->request->get('title')]);
             } catch (\Exception $e) {
-                switch ($e->getCode()) {
-                    case Books::ERROR_TITLE_PRESENCE:
-                        $message = 'タイトルが必要です';
-                        break;
-                    case Books::ERROR_TITLE_UNIQUENESS:
-                        $message = '同じ本を登録しています';
-                        break;
-                    default:
-                        $message = $e->getMessage();
-                }
-                $this->view->setVar('error', $message);
+                $this->view->setVar('error', $e->getMessage());
             }
         }
     }

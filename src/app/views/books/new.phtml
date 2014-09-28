@@ -3,6 +3,6 @@
         <legend>新しい本を追加する</legend>
     </fieldset>
     <label for="title">タイトル：</label><input type="text" name="title" id="title"/>
-    <p style="color:red"><?= isset($error) ? $error : '' ?></p>
+    <p style="color:red"><?= isset($error) ? h($error) : '' ?></p>
     <input type="submit" value="登録"/>
 </form>

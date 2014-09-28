@@ -14,8 +14,9 @@ class Books extends Base\Books
     const RATE_PLUS  = 'plus';
     const RATE_MINUS = 'minus';
 
-    const ERROR_TITLE_PRESENCE   = 'title.presence';
-    const ERROR_TITLE_UNIQUENESS = 'title.uniqueness';
+    // error type
+    const ERROR_TITLE_PRESENCE   = 'Presence';
+    const ERROR_TITLE_UNIQUENESS = 'Unique';
 
     /**
      * @param array $parameters
@@ -49,7 +50,7 @@ class Books extends Base\Books
 
         if (!$book->create()) {
             foreach ($book->getMessages() as $message) {
-                throw new \Exception($message->getMessage(), $message->getField());
+                throw new \Exception($message->getMessage());
             }
         }
 
@@ -62,13 +63,13 @@ class Books extends Base\Books
     public function validation()
     {
         $this->validate(new PresenceOf([
-            'field'   => self::ERROR_TITLE_PRESENCE,
-            'message' => 'title is required',
+            'field'   => 'title',
+            'message' => 'タイトルが必要です',
         ]));
 
         $this->validate(new Uniqueness([
-            'field'   => self::ERROR_TITLE_UNIQUENESS,
-            'message' => 'title must be unique',
+            'field'   => 'title',
+            'message' => '同じ本を登録しています',
         ]));
 
         if ($this->validationHasFailed()) {
