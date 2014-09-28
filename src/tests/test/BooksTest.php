@@ -39,6 +39,17 @@ class BooksTest extends \UnitTestCase
 
     /**
      * @test
+     * @expectedException \InvalidArgumentException
+     */
+    public function duplicate_titleには例外を投げる()
+    {
+        $book1 = Books::createNewBook(['title' => 'test']);
+        $book2 = Books::createNewBook(['title' => 'test']);
+    }
+
+
+    /**
+     * @test
      */
     public function updateRateは与えられた値に応じてrateを上下させる()
     {

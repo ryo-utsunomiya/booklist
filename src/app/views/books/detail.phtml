@@ -1,0 +1,9 @@
+<?php print_r($book->toArray()) ?>
+<table class="table table-bordered">
+    <?php foreach ($book as $key => $value) { ?>
+        <tr>
+            <th><?= $key ?></th>
+            <td><?= $value ?></td>
+        </tr>
+    <?php } ?>
+</table>

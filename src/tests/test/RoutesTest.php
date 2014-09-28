@@ -35,6 +35,7 @@ class RoutesTest extends \UnitTestCase
         return [
             ['/', 'index', 'index'], // Index::index
             ['/books/new', 'books', 'new'], // Books::new
+            ['/books/1/detail', 'books', 'detail'], // Books::detail
             ['/books/1/rate/plus', 'books', 'rate'], // Books::rate
         ];
     }

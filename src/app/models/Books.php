@@ -2,10 +2,20 @@
 
 namespace Booklist\Model;
 
+use Phalcon\Mvc\Model\Validator\PresenceOf;
+use Phalcon\Mvc\Model\Validator\Uniqueness;
+
+/**
+ * Class Books
+ * @package Booklist\Model
+ */
 class Books extends Base\Books
 {
     const RATE_PLUS  = 'plus';
     const RATE_MINUS = 'minus';
+
+    const ERROR_TITLE_PRESENCE   = 'title.presence';
+    const ERROR_TITLE_UNIQUENESS = 'title.uniqueness';
 
     /**
      * @param array $parameters
@@ -21,6 +31,7 @@ class Books extends Base\Books
      * @param array $params
      *
      * @return Books
+     * @throws \Exception
      */
     public static function createNewBook(array $params)
     {
@@ -32,16 +43,13 @@ class Books extends Base\Books
         $rate  = isset($params['rate']) ? $params['rate'] : 0;
         $own   = isset($params['own']) ? $params['own'] : 0;
 
-        $book = new self();
-        $book->setTitle($title);
-        $book->setRate($rate);
-        $book->setOwn($own);
+        $book = (new self())->setTitle($title)
+                            ->setRate($rate)
+                            ->setOwn($own);
 
         if (!$book->create()) {
             foreach ($book->getMessages() as $message) {
-                // todo 例外を投げてコントローラーでエラーハンドリング
-                echo $message->getMessage(), PHP_EOL;
-                exit(255);
+                throw new \Exception($message->getMessage(), $message->getField());
             }
         }
 
@@ -49,12 +57,37 @@ class Books extends Base\Books
     }
 
     /**
-     * @param string $key
+     * @return bool
+     */
+    public function validation()
+    {
+        $this->validate(new PresenceOf([
+            'field'   => self::ERROR_TITLE_PRESENCE,
+            'message' => 'title is required',
+        ]));
+
+        $this->validate(new Uniqueness([
+            'field'   => self::ERROR_TITLE_UNIQUENESS,
+            'message' => 'title must be unique',
+        ]));
+
+        if ($this->validationHasFailed()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param $key
+     *
+     * @return $this
+     * @throws \Exception
      */
     public function updateRate($key)
     {
         if ($key === self::RATE_PLUS) {
-            $this->setRate($this->getRate() + 1);
+            $rate = $this->getRate() + 1;
+            $this->setRate($rate);
         } elseif ($key === self::RATE_MINUS) {
             $rate = max(0, $this->getRate() - 1); // マイナスにならないようにする
             $this->setRate($rate);
@@ -62,8 +95,12 @@ class Books extends Base\Books
             throw new \InvalidArgumentException('rate has invalid value');
         }
         if (!$this->update()) {
-            // todo error handling
+            foreach ($this->getMessages() as $message) {
+                throw new \Exception($message->getMessage(), $message->getField());
+            }
         }
+
+        return $this;
     }
 }
  
