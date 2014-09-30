@@ -14,11 +14,11 @@
             <td><?= h($book->getRate()) ?></td>
             <td>
                 <button type="button" class="btn btn-default"
-                        onclick="location.href='/books/<?= h($book->getId()) ?>/rate/plus'">
+                        onclick="location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/rate/plus'">
                     <span class="glyphicon glyphicon-plus"></span>
                 </button>
                 <button type="button" class="btn btn-default"
-                        onclick="location.href='/books/<?= h($book->getId()) ?>/rate/minus'">
+                        onclick="location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/rate/minus'">
                     <span class="glyphicon glyphicon-minus"></span>
                 </button>
             </td>
