@@ -2,6 +2,7 @@
 
 namespace Booklist\Model;
 
+use Phalcon\Mvc\Model\Behavior\Timestampable;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
 
@@ -17,6 +18,30 @@ class Books extends Base\Books
     // error type
     const ERROR_TITLE_PRESENCE   = 'Presence';
     const ERROR_TITLE_UNIQUENESS = 'Unique';
+
+    public function initialize()
+    {
+        $this->addBehavior(
+            new Timestampable(
+                [
+                    'beforeCreate' => [
+                        'field'  => 'created',
+                        'format' => 'Y-m-d',
+                    ]
+                ]
+            )
+        );
+        $this->addBehavior(
+            new Timestampable(
+                [
+                    'beforeSave' => [
+                        'field'  => 'modified',
+                        'format' => 'Y-m-d',
+                    ]
+                ]
+            )
+        );
+    }
 
     /**
      * @param array $parameters
@@ -44,9 +69,7 @@ class Books extends Base\Books
         $rate  = isset($params['rate']) ? $params['rate'] : 0;
         $own   = isset($params['own']) ? $params['own'] : 0;
 
-        $book = (new self())->setTitle($title)
-                            ->setRate($rate)
-                            ->setOwn($own);
+        $book = (new self())->setTitle($title)->setRate($rate)->setOwn($own);
 
         if (!$book->create()) {
             foreach ($book->getMessages() as $message) {
@@ -62,15 +85,22 @@ class Books extends Base\Books
      */
     public function validation()
     {
-        $this->validate(new PresenceOf([
-            'field'   => 'title',
-            'message' => 'タイトルが必要です',
-        ]));
-
-        $this->validate(new Uniqueness([
-            'field'   => 'title',
-            'message' => '同じ本を登録しています',
-        ]));
+        $this->validate(
+            new PresenceOf(
+                [
+                    'field'   => 'title',
+                    'message' => 'タイトルが必要です',
+                ]
+            )
+        );
+        $this->validate(
+            new Uniqueness(
+                [
+                    'field'   => 'title',
+                    'message' => '同じ本を登録しています',
+                ]
+            )
+        );
 
         if ($this->validationHasFailed()) {
             return false;
