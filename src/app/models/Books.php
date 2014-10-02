@@ -26,7 +26,7 @@ class Books extends Base\Books
                 [
                     'beforeCreate' => [
                         'field'  => 'created',
-                        'format' => 'Y-m-d',
+                        'format' => 'Y-m-d H:i:s',
                     ]
                 ]
             )
@@ -36,7 +36,7 @@ class Books extends Base\Books
                 [
                     'beforeSave' => [
                         'field'  => 'modified',
-                        'format' => 'Y-m-d',
+                        'format' => 'Y-m-d H:i:s',
                     ]
                 ]
             )
