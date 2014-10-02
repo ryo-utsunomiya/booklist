@@ -21,6 +21,10 @@
                         onclick="location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/rate/minus'">
                     <span class="glyphicon glyphicon-minus"></span>
                 </button>
+                <button type="button" class="btn btn-default"
+                        onclick="if(confirm('Are you sure?'))location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/delete'">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
             </td>
         </tr>
     <?php } // endforeach ?>

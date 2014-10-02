@@ -42,5 +42,19 @@ class BooksController extends ControllerBase
         $this->view->setVar('book', $book);
     }
 
+    public function deleteAction()
+    {
+        $id = $this->dispatcher->getParam('id');
+
+        $book = Books::findFirst($id);
+
+        if (!$book->delete()) {
+            foreach ($book->getMessages() as $message) {
+                throw new \Exception($message->getMessage(), $message->getField());
+            }
+        }
+        $this->response->redirect(base_uri());
+    }
+
 }
 
