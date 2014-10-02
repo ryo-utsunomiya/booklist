@@ -133,5 +133,13 @@ class Books extends Base\Books
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isModifiedToday()
+    {
+        return (date('Y-m-d') === date('Y-m-d', strtotime($this->modified)));
+    }
 }
  

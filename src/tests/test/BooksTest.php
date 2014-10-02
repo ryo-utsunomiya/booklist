@@ -78,5 +78,23 @@ class BooksTest extends \UnitTestCase
     {
         Books::createNewBook(['title' => 'test'])->updateRate('INVALID_STRING');
     }
+
+    /**
+     * @test
+     */
+    public function isModifiedTodayは1日以内に更新された場合はtrueを返す()
+    {
+        $this->assertTrue(Books::createNewBook(['title' => 'test'])->isModifiedToday());
+    }
+
+    /**
+     * @test
+     */
+    public function isModifiedTodayは更新から1日以上経った場合はfalseを返す()
+    {
+        $book = Books::createNewBook(['title' => 'test'])->setModified(date('Y-m-d H:i:s', strtotime('- 1 day')));
+        $this->assertFalse($book->isModifiedToday());
+    }
+
 }
  

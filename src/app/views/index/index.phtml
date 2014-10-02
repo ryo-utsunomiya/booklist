@@ -13,14 +13,16 @@
             </td>
             <td><?= h($book->getRate()) ?></td>
             <td>
-                <button type="button" class="btn btn-default"
-                        onclick="location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/rate/plus'">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </button>
-                <button type="button" class="btn btn-default"
-                        onclick="location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/rate/minus'">
-                    <span class="glyphicon glyphicon-minus"></span>
-                </button>
+                <?php if (!$book->isModifiedToday()) { ?>
+                    <button type="button" class="btn btn-default"
+                            onclick="location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/rate/plus'">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button type="button" class="btn btn-default"
+                            onclick="location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/rate/minus'">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                <?php } // endif ?>
                 <button type="button" class="btn btn-default"
                         onclick="if(confirm('Are you sure?'))location.href='<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/delete'">
                     <span class="glyphicon glyphicon-remove"></span>
