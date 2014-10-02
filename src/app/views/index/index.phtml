@@ -7,7 +7,7 @@
     <?php foreach ($books as $book) /** @var \Booklist\Model\Books $book */ { ?>
         <tr>
             <td style="max-width: 30em">
-                <a href="/books/<?= h($book->getId()) ?>/detail">
+                <a href="<?= rtrim(base_uri(), '/') ?>/books/<?= h($book->getId()) ?>/detail">
                     <?= h($book->getTitle()) ?>
                 </a>
             </td>
