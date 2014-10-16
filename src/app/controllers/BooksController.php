@@ -27,8 +27,8 @@ class BooksController extends ControllerBase
         $id  = $this->dispatcher->getParam('id');
         $key = $this->dispatcher->getParam('key');
 
-        Books::findFirst($id)
-             ->updateRate($key);
+        $book = Books::findFirst($id);
+        $book->updateRate($key);
 
         $this->response->redirect(base_uri());
     }
@@ -48,7 +48,8 @@ class BooksController extends ControllerBase
 
         $book = Books::findFirst($id);
 
-        if (!$book->delete()) {
+        $result = $book->delete();
+        if ($result === false) {
             foreach ($book->getMessages() as $message) {
                 throw new \Exception($message->getMessage(), $message->getField());
             }

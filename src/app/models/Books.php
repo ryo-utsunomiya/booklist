@@ -15,10 +15,6 @@ class Books extends Base\Books
     const RATE_PLUS  = 'plus';
     const RATE_MINUS = 'minus';
 
-    // error type
-    const ERROR_TITLE_PRESENCE   = 'Presence';
-    const ERROR_TITLE_UNIQUENESS = 'Unique';
-
     public function initialize()
     {
         $this->addBehavior(
@@ -69,9 +65,12 @@ class Books extends Base\Books
         $rate  = isset($params['rate']) ? $params['rate'] : 0;
         $own   = isset($params['own']) ? $params['own'] : 0;
 
-        $book = (new self())->setTitle($title)->setRate($rate)->setOwn($own);
+        $book = (new self())->setTitle($title)
+                            ->setRate($rate)
+                            ->setOwn($own);
 
-        if (!$book->create()) {
+        $result = $book->create();
+        if ($result === false) {
             foreach ($book->getMessages() as $message) {
                 throw new \Exception($message->getMessage());
             }
@@ -109,27 +108,46 @@ class Books extends Base\Books
     }
 
     /**
-     * @param $key
+     * @param $rate_string
      *
      * @return $this
      * @throws \Exception
      */
-    public function updateRate($key)
+    public function updateRate($rate_string)
     {
-        if ($key === self::RATE_PLUS) {
-            $rate = $this->getRate() + 1;
-            $this->setRate($rate);
-        } elseif ($key === self::RATE_MINUS) {
-            $rate = max(0, $this->getRate() - 1); // マイナスにならないようにする
-            $this->setRate($rate);
-        } else {
-            throw new \InvalidArgumentException('rate has invalid value');
-        }
-        if (!$this->update()) {
+        $result = $this->setRate($this->convertToRate($rate_string))
+                       ->update();
+
+        if ($result === false) {
             foreach ($this->getMessages() as $message) {
                 throw new \Exception($message->getMessage(), $message->getField());
             }
         }
+
+        return $this;
+    }
+
+    private function convertToRate($rate_string)
+    {
+        if ($rate_string === self::RATE_PLUS) {
+            return $this->getRate() + 1;
+        } elseif ($rate_string === self::RATE_MINUS) {
+            return $this->getRate() - 1;
+        } else {
+            throw new \InvalidArgumentException('rate has invalid value');
+        }
+    }
+
+    /**
+     * Method to set the value of field rate
+     *
+     * @param integer $rate
+     *
+     * @return $this
+     */
+    public function setRate($rate)
+    {
+        $this->rate = max($rate, 0); // マイナスにならないようにする
 
         return $this;
     }
@@ -139,7 +157,11 @@ class Books extends Base\Books
      */
     public function isModifiedToday()
     {
-        return (date('Y-m-d') === date('Y-m-d', strtotime($this->modified)));
+        $format       = 'Ymd';
+        $today        = date($format);
+        $modified_day = date($format, strtotime($this->getModified()));
+
+        return ($today === $modified_day);
     }
 }
  

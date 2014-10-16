@@ -15,9 +15,9 @@ function h($str)
  */
 function get_config()
 {
-    static $config;
-    if (is_null($config)) {
-        $config = require APP_PATH . '/app/config/config.php';
+    static $config; // configをキャッシュする静的変数
+    if (is_null($config)) { // キャッシュされたconfigが有るかチェックし、無い場合にはファイルを読む
+        $config = require APP_PATH . '/app/config/config.php'; // configを取得し、静的変数にキャッシュする
     }
 
     return $config;
