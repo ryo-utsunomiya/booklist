@@ -127,15 +127,22 @@ class Books extends Base\Books
         return $this;
     }
 
+    /**
+     * @param $rate_string
+     *
+     * @return int
+     */
     private function convertToRate($rate_string)
     {
+        $rate = $this->getRate();
         if ($rate_string === self::RATE_PLUS) {
-            return $this->getRate() + 1;
+            $rate++;
         } elseif ($rate_string === self::RATE_MINUS) {
-            return $this->getRate() - 1;
+            $rate--;
         } else {
             throw new \InvalidArgumentException('rate has invalid value');
         }
+        return $rate;
     }
 
     /**
@@ -153,6 +160,14 @@ class Books extends Base\Books
     }
 
     /**
+     * @return int
+     */
+    public function getRate()
+    {
+        return (int)parent::getRate();
+    }
+
+    /**
      * @return bool
      */
     public function isModifiedToday()
@@ -163,5 +178,28 @@ class Books extends Base\Books
 
         return ($today === $modified_day);
     }
+
+    /**
+     * @return bool
+     */
+    public function isOld()
+    {
+        return (strtotime($this->getModified()) < strtotime('- 6 month'));
+    }
+
+    /**
+     * @return bool
+     */
+    public function rateIsZero()
+    {
+        return ($this->getRate() === 0);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isOldAndRateIsZero()
+    {
+        return ($this->isOld() && $this->rateIsZero());
+    }
 }
- 

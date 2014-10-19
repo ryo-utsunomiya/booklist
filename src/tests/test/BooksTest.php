@@ -96,5 +96,32 @@ class BooksTest extends \UnitTestCase
         $this->assertFalse($book->isModifiedToday());
     }
 
+    /**
+     * @test
+     */
+    public function isOldは更新から6ヶ月以上経っている場合はtrueを返す()
+    {
+        $old_book = Books::createNewBook(['title' => 'test'])->setModified(date('Y-m-d H:i:s', strtotime('- 7 month')));
+        $this->assertTrue($old_book->isOld());
+    }
+
+    /**
+     * @test
+     */
+    public function isOldは更新から6ヶ月以上経っていない場合はfalseを返す()
+    {
+        $new_book = Books::createNewBook(['title' => 'test'])->setModified(date('Y-m-d H:i:s'));
+        $this->assertFalse($new_book->isOld());
+    }
+
+    /**
+     * @test
+     */
+    public function rateIsZeroはrateが0の場合trueを返す()
+    {
+        $new_book = Books::createNewBook(['title' => 'test']);
+        $this->assertTrue($new_book->rateIsZero());
+    }
+
 }
  
