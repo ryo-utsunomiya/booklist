@@ -20,6 +20,16 @@ class BooksTest extends \UnitTestCase
     /**
      * @test
      */
+    public function findFirstはBooksオブジェクトを返す()
+    {
+        $book = Books::createNewBook(['title' => 'test']);
+
+        $this->assertTrue(Books::findFirst($book->getId()) instanceof Books);
+    }
+
+    /**
+     * @test
+     */
     public function createNewBooksはBooksオブジェクトを初期化して保存する()
     {
         $book = Books::createNewBook(['title' => 'test']);
