@@ -11,6 +11,12 @@
          stopOnFailure="true"
          syntaxCheck="true">
     <testsuite name="Booklist - Testsuite">
-        <directory>./</directory>
+        <directory>./test</directory>
     </testsuite>
+    <filter>
+        <blacklist>
+            <directory suffix=".php">../tests</directory>
+            <directory suffix=".php">../vendor</directory>
+        </blacklist>
+    </filter>
 </phpunit>
