@@ -27,8 +27,10 @@ $loader->registerDirs(array(
 ));
 
 $loader->registerNamespaces([
-    'Booklist\Controller' => APP_PATH . '/app/controllers',
-    'Booklist\Model'      => APP_PATH . '/app/models',
+    'Booklist\Controller'      => APP_PATH . '/app/controllers',
+    'Booklist\Model'           => APP_PATH . '/app/models',
+    'Booklist\Model\Validator' => APP_PATH . '/app/models/validators',
+
 ]);
 
 $loader->register();
