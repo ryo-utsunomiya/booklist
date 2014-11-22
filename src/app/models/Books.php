@@ -2,6 +2,7 @@
 
 namespace Booklist\Model;
 
+use Booklist\Model\Validator\MaxMinValidator;
 use Phalcon\Mvc\Model\Behavior\Timestampable;
 use Phalcon\Mvc\Model\Validator\PresenceOf;
 use Phalcon\Mvc\Model\Validator\Uniqueness;
@@ -100,6 +101,13 @@ class Books extends Base\Books
                 ]
             )
         );
+        $this->validate(
+            new MaxMinValidator([
+                'field'   => 'rate',
+                'message' => 'rateの値が不正です',
+                'min'     => 0,
+            ])
+        );
 
         if ($this->validationHasFailed()) {
             return false;
@@ -128,6 +136,8 @@ class Books extends Base\Books
     }
 
     /**
+     * 渡された文字列を元に、rateの新しい値を返す
+     *
      * @param $rate_string
      *
      * @return int
