@@ -22,7 +22,8 @@ try {
 
     $di = require __DIR__ . "/../app/config/services.php";
 
-    echo (new Phalcon\Mvc\Application($di))->handle()->getContent();
+    $app = new Phalcon\Mvc\Application($di);
+    echo $app->handle()->getContent();
 
 } catch (\Exception $e) {
     echo $e->getMessage();

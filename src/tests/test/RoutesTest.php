@@ -38,6 +38,7 @@ class RoutesTest extends \UnitTestCase
             ['/books/1/detail', 'books', 'detail'], // Books::detail
             ['/books/1/rate/plus', 'books', 'rate'], // Books::rate
             ['/books/1/delete', 'books', 'delete'], // Books::delete
+            ['/api/books', 'books', 'index']
         ];
     }
 }

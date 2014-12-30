@@ -9,4 +9,10 @@ $router->add('/books/{id}/detail', 'Books::detail');
 $router->add('/books/{id}/delete', 'Books::delete');
 $router->add('/books/{id}/rate/{key}', 'Books::rate');
 
+$api = new \Phalcon\Mvc\Router\Group();
+$api->setPrefix('/api');
+$api->add('/books', 'Booklist\Controller\Api\Books::index');
+
+$router->mount($api);
+
 return $router;
