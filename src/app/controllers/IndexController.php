@@ -6,15 +6,15 @@ use Booklist\Model\Books;
 
 class IndexController extends ControllerBase
 {
-
     public function indexAction()
     {
-        $books = Books::query()
-                      ->orderBy('rate DESC, modified DESC')
-                      ->execute();
+        $query = Books::query()->orderBy('rate DESC, modified DESC');
 
-        $this->view->setVar('books', $books);
+        if ($search = $this->request->get('search')) {
+            $query->where("title LIKE :title:", ['title' => '%' . $search . '%']);
+        }
+
+        $this->view->setVar('books', $query->execute());
     }
-
 }
 
